@@ -1,0 +1,7 @@
+
+
+<div *ngFor="let product of products.products">
+  <h4>{{ product.name }}</h4>
+  <p>{{product.description}} - ${{product.price}}</p>
+  <img src="{{product.image}}" alt="Image of {{ product.name }}" style="max-height: 100px">
+</div>
