@@ -14,6 +14,11 @@ import { ShopComponent } from './shop/shop.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './footer/footer.component';
+import { ProductModalComponent } from './shop/product-modal/product-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +31,19 @@ import { HttpClientModule} from '@angular/common/http';
     EditComponent,
     OrdersComponent,
     CartComponent,
-    ShopComponent
+    ShopComponent,
+    HeaderComponent,
+    HomeComponent,
+    FooterComponent,
+    ProductModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

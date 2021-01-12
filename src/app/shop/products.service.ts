@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Product} from '../shared/product.model';
 
 @Injectable({
@@ -7,9 +7,14 @@ import {Product} from '../shared/product.model';
 export class ProductsService {
   products: Product[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   setProducts(products: Product[]): void {
     this.products = products;
+
+    // todo: temp
+    this.products = [...this.products, ...this.products];
+    this.products = [...this.products, ...this.products];
   }
 }

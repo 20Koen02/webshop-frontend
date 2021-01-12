@@ -1,0 +1,72 @@
+.brand-title-link {
+  margin-right: 2em;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  margin-bottom: 0.5em;
+}
+
+.brand-title {
+  font-size: 2.5rem;
+  letter-spacing: 0.35rem;
+  text-transform: uppercase;
+}
+
+.brand-title-silent {
+  color: #949494;
+}
+
+.brand-undertitle {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.1rem;
+  margin-left: 3px;
+}
+
+
+.brand-links {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 28px;
+}
+
+.custom-icon {
+  width: 28px;
+  height: 28px;
+  fill: #f8f9fa;
+  stroke: black;
+  stroke-width: 2px;
+  vertical-align: bottom;
+}
+
+.announcement-container {
+  background-color: black;
+}
+
+.announcement {
+  padding: 0.15em 0 0.5em 0;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.announcement-text {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 0.70rem;
+  letter-spacing: 0.2rem;
+  color: #ffedde;
+  text-transform: uppercase;
+  margin: 0;
+
+  display: inline-block;
+  white-space: nowrap;
+  animation: floatText 10s infinite linear;
+  padding-left: 100%;
+}
+
+@keyframes floatText {
+  to {
+    transform: translateX(-100%);
+  }
+}

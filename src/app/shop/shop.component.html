@@ -1,7 +1,13 @@
-
-
-<div *ngFor="let product of products.products">
-  <h4>{{ product.name }}</h4>
-  <p>{{product.description}} - ${{product.price}}</p>
-  <img src="{{product.image}}" alt="Image of {{ product.name }}" style="max-height: 100px">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 text-center p-4" *ngFor="let product of products.products" (click)="open(product)">
+      <div class="product-container">
+        <div class="overflow-hidden">
+          <img src="{{product.image}}" alt="Image of {{ product.name }}" class="w-100 img-fluid">
+        </div>
+        <h3 class="product product-name">{{ product.name }}</h3>
+        <p class="product product-price">€ {{product.price}}</p>
+      </div>
+    </div>
+  </div>
 </div>

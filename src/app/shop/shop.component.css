@@ -1,0 +1,29 @@
+
+.product-container {
+  cursor: pointer;
+}
+
+.product {
+  font-family: 'Barlow', sans-serif;
+  text-transform: uppercase;
+}
+
+.product-container img {
+  transition: transform .5s ease;
+}
+
+.product-container:hover img {
+  transform: scale(1.2);
+}
+
+.product-name {
+  margin: 1em 0 0.1em 0;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+.product-price {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
