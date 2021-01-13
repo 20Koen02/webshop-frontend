@@ -1,5 +1,14 @@
 .custom-action-icon {
   position: relative;
   height: 16px;
+}
+
+.svgbutton {
+  line-height: 0;
+}
+
+.plusminus {
   bottom: 2px;
+  color: #6c757d;
+  cursor: pointer;
 }

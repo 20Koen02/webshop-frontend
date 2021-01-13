@@ -19,7 +19,7 @@ export class ShopComponent implements OnInit {
   }
 
   open(product: Product): void {
-    const modalRef = this.modalService.open(ProductModalComponent, { size: 'lg' });
+    const modalRef = this.modalService.open(ProductModalComponent, { size: 'lg'});
     modalRef.componentInstance.product = product;
   }
 

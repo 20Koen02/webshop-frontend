@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-3">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+        <li ngbNavItem="1">
+          <a ngbNavLink>Orders</a>
+          <ng-template ngbNavContent>
+            <app-orders></app-orders>
+          </ng-template>
+        </li>
+        <li ngbNavItem="2">
+          <a ngbNavLink>Edit Profile</a>
+          <ng-template ngbNavContent>
+            <app-edit></app-edit>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+    <div [ngbNavOutlet]="nav" class="col-md-9 mt-2"></div>
+  </div>
+</div>

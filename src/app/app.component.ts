@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BackendService} from './backend.service';
 
 @Component({
@@ -6,7 +6,11 @@ import {BackendService} from './backend.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(private backend: BackendService) {
+  }
+
+  ngOnInit(): void {
+    this.backend.autoLogin();
   }
 }

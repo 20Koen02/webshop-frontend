@@ -4,7 +4,7 @@
 <div class="modal-body">
   <div class="row">
     <div class="col-lg-8">
-      <img src="{{product.image}}" alt="Image of {{ product.name }}" class="product-image img-fluid rounded">
+      <img src="{{product.image}}" alt="Image of {{ product.name }}" class="product-image img-fluid">
     </div>
     <div class="col-lg-4">
       <h3 class="product product-name">{{ product.name }}</h3>
@@ -13,27 +13,28 @@
         <label for="quantity" class="product">Quantity: </label>
         <div class="row">
           <div class="col pr-1">
-            <input type="number" class="form-control product" id="quantity" formControlName="quantity" [ngClass]="{'is-invalid': f.quantity.touched && f.quantity.invalid}">
+            <input type="number" class="form-control product" id="quantity" formControlName="quantity"
+                   [ngClass]="{'is-invalid': f.quantity.touched && f.quantity.invalid}">
           </div>
           <div class="col-auto pl-1">
-            <button class="btn btn-primary" type="submit" [disabled]="!form.valid">
-              <svg aria-hidden="true" focusable="false" role="presentation" class="custom-icon" viewBox="0 0 64 64">
-                <g fill="none" stroke="#fff" stroke-width="4">
-                  <path d="M25 26c0-15.79 3.57-20 8-20s8 4.21 8 20"></path>
-                  <path d="M14.74 18h36.51l3.59 36.73h-43.7z"></path>
-                </g>
+            <button class="btn btn-outline-secondary mr-2 p-2 svgbutton" [disabled]="!form.valid">
+              <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="cart-plus" role="img"
+                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                   class="custom-action-icon">
+                <path fill="currentColor"
+                      d="M551.991 64H144.28l-8.726-44.608C133.35 8.128 123.478 0 112 0H12C5.373 0 0 5.373 0 12v24c0 6.627 5.373 12 12 12h80.24l69.594 355.701C150.796 415.201 144 430.802 144 448c0 35.346 28.654 64 64 64s64-28.654 64-64a63.681 63.681 0 0 0-8.583-32h145.167a63.681 63.681 0 0 0-8.583 32c0 35.346 28.654 64 64 64s64-28.654 64-64c0-18.136-7.556-34.496-19.676-46.142l1.035-4.757c3.254-14.96-8.142-29.101-23.452-29.101H203.76l-9.39-48h312.405c11.29 0 21.054-7.869 23.452-18.902l45.216-208C578.695 78.139 567.299 64 551.991 64zM464 424c13.234 0 24 10.766 24 24s-10.766 24-24 24-24-10.766-24-24 10.766-24 24-24zm-256 0c13.234 0 24 10.766 24 24s-10.766 24-24 24-24-10.766-24-24 10.766-24 24-24zm279.438-152H184.98l-31.31-160h368.548l-34.78 160zM272 200v-16c0-6.627 5.373-12 12-12h32v-32c0-6.627 5.373-12 12-12h16c6.627 0 12 5.373 12 12v32h32c6.627 0 12 5.373 12 12v16c0 6.627-5.373 12-12 12h-32v32c0 6.627-5.373 12-12 12h-16c-6.627 0-12-5.373-12-12v-32h-32c-6.627 0-12-5.373-12-12z"
+                      class=""></path>
               </svg>
-              +
             </button>
           </div>
         </div>
       </form>
-      <ngb-alert type="success" [dismissible]="false" class="mt-3" *ngIf="quantity">
-        <strong>Success!</strong> Added {{quantity}} items to your cart.
+      <ngb-alert type="secondary" [dismissible]="false" class="mt-3 mr-2" *ngIf="quantity">
+        Added {{quantity}} {{quantity == 1 ? 'item' : 'items'}} to your cart
       </ngb-alert>
     </div>
   </div>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Close &times;</button>
+  <button type="button" class="btn btn-secondary" ngbAutofocus (click)="activeModal.close()">Close &times;</button>
 </div>

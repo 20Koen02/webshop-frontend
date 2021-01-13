@@ -24,6 +24,7 @@
 
 
 .brand-links {
+  cursor: pointer;
   font-family: 'Barlow', sans-serif;
   font-weight: 500;
   text-transform: uppercase;
@@ -31,12 +32,12 @@
 }
 
 .custom-icon {
-  width: 28px;
-  height: 28px;
-  fill: #f8f9fa;
-  stroke: black;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  fill: rgba(0,0,0,.5);
   stroke-width: 2px;
-  vertical-align: bottom;
+  bottom: 2px;
 }
 
 .announcement-container {

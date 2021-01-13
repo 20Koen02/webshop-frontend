@@ -13,12 +13,15 @@ import { CartComponent } from './cart/cart.component';
 import { ShopComponent } from './shop/shop.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductModalComponent } from './shop/product-modal/product-modal.component';
+import { LoginFormComponent } from './login/login-form/login-form.component';
+import { RegisterFormComponent } from './login/register-form/register-form.component';
+import {AuthInterceptorService} from './app-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import { ProductModalComponent } from './shop/product-modal/product-modal.compon
     HeaderComponent,
     HomeComponent,
     FooterComponent,
-    ProductModalComponent
+    ProductModalComponent,
+    LoginFormComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +50,13 @@ import { ProductModalComponent } from './shop/product-modal/product-modal.compon
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

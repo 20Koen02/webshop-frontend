@@ -14,7 +14,14 @@
   text-transform: uppercase;
 }
 
-.custom-icon {
-  height: 22px;
+.custom-action-icon {
+  position: relative;
+  height: 16px;
+  width: 16px;
+  margin-right: 2px;
+  bottom: 1px;
 }
 
+.svgbutton {
+  line-height: 20px;
+}

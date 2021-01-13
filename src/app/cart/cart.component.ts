@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {BackendService} from '../backend.service';
 import {CartService} from './cart.service';
+import {CartProduct} from '../shared/cart-product.model';
 
 @Component({
   selector: 'app-cart',
@@ -13,4 +14,19 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  removeProduct(product: CartProduct): void {
+    this.cartService.products = this.cartService.products.filter(value => value.name !== product.name);
+  }
+
+  productPlusPlus(product: CartProduct): void {
+    product.quantity++;
+
+  }
+
+  productMinMin(product: CartProduct): void {
+    product.quantity--;
+    if (product.quantity < 0) {
+      this.cartService.products = this.cartService.products.filter(value => value.name !== product.name);
+    }
+  }
 }

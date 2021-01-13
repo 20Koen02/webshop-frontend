@@ -10,6 +10,11 @@ export class CartService {
   constructor() {
   }
 
+  getFilteredProducts(): CartProduct[] {
+    return this.products.filter(value => value.quantity > 0);
+  }
+
+
   addProduct(product: CartProduct): void {
     let exists = false;
     this.products.forEach((p: CartProduct) => {
