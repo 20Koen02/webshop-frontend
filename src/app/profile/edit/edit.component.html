@@ -1,1 +1,25 @@
 <h3>Edit Profile</h3>
+<p>Leave the password field blank to only update your email address.</p>
+<div class="row">
+  <div class="col-lg-6">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form-group">
+        <label for="email">New email</label>
+        <input id="email" formControlName="email" class="form-control" type="email" [ngClass]="{'is-invalid': f.email.touched && f.email.invalid}">
+      </div>
+      <div class="form-group">
+        <label for="password">New password</label>
+        <input id="password" formControlName="password" class="form-control" type="password" [ngClass]="{'is-invalid': f.password.touched && f.password.invalid}">
+      </div>
+      <ngb-alert type="secondary" [dismissible]="false" *ngIf="editService.success">
+        Successfully updated your profile
+      </ngb-alert>
+      <ngb-alert type="secondary" [dismissible]="false" *ngIf="editService.failed">
+        There was an error updating your profile
+      </ngb-alert>
+      <div class="form-group">
+        <button type="submit" class="btn btn-secondary btn-block" [disabled]="!form.valid">Edit</button>
+      </div>
+    </form>
+  </div>
+</div>

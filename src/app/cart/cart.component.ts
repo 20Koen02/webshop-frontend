@@ -20,7 +20,6 @@ export class CartComponent implements OnInit {
 
   productPlusPlus(product: CartProduct): void {
     product.quantity++;
-
   }
 
   productMinMin(product: CartProduct): void {
@@ -28,5 +27,11 @@ export class CartComponent implements OnInit {
     if (product.quantity < 0) {
       this.cartService.products = this.cartService.products.filter(value => value.name !== product.name);
     }
+  }
+
+  order(): void {
+    // TODO: send request to create order
+    // TODO: send request to add product to order
+    console.log(this.cartService.products);
   }
 }

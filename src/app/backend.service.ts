@@ -8,6 +8,7 @@ import {Observable, throwError} from 'rxjs';
 import {log} from 'util';
 import {Router} from '@angular/router';
 import {LoginFormService} from './login/login-form/login-form.service';
+import {EditService} from './profile/edit/edit.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,36 @@ export class BackendService {
   constructor(private http: HttpClient,
               private productsService: ProductsService,
               private router: Router,
-              private loginFormService: LoginFormService) {
+              private loginFormService: LoginFormService,
+              private editService: EditService) {
+  }
+
+  editUser(editData: {email: string, password: string}): void {
+    this.http
+      .put(this.rootPath + '/users/' + encodeURIComponent(this.curUser.username), editData)
+      .pipe(
+        tap(l => {
+          this.router.navigate(['/profile'], {fragment: 'edit'});
+          this.editService.reset();
+          this.editService.isSuccess();
+        }),
+        catchError(err => {
+          this.editService.reset();
+          this.editService.isFailed();
+          console.log(err);
+          return throwError('Could not edit');
+        })
+      ).subscribe();
+  }
+
+  syncAllProducts(): void {
+    this.http
+      .get<Product[]>(this.rootPath + '/products')
+      .pipe(
+        tap((products: Product[]) => {
+          this.productsService.setProducts(products);
+        })
+      ).subscribe();
   }
 
   login(username: string, password: string): void {
@@ -44,16 +74,6 @@ export class BackendService {
     this.autoLogout(l.expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(this.curUser));
     this.loginFormService.correctPassword();
-  }
-
-  syncAllProducts(): void {
-    this.http
-      .get<Product[]>(this.rootPath + '/products')
-      .pipe(
-        tap((products: Product[]) => {
-          this.productsService.setProducts(products);
-        })
-      ).subscribe();
   }
 
   autoLogin(): void {

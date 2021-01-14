@@ -1,21 +1,21 @@
 <div class="container mt-3">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
       <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
-        <li ngbNavItem="1">
-          <a ngbNavLink>Orders</a>
+        <li ngbNavItem="orders">
+          <a ngbNavLink (click)="changeFragment()">Orders</a>
           <ng-template ngbNavContent>
             <app-orders></app-orders>
           </ng-template>
         </li>
-        <li ngbNavItem="2">
-          <a ngbNavLink>Edit Profile</a>
+        <li ngbNavItem="edit">
+          <a ngbNavLink (click)="changeFragment()">Edit Profile</a>
           <ng-template ngbNavContent>
             <app-edit></app-edit>
           </ng-template>
         </li>
       </ul>
     </div>
-    <div [ngbNavOutlet]="nav" class="col-md-9 mt-2"></div>
+    <div [ngbNavOutlet]="nav" class="col-md-9"></div>
   </div>
 </div>
