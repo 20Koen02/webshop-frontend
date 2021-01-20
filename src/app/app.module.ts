@@ -22,6 +22,7 @@ import { ProductModalComponent } from './shop/product-modal/product-modal.compon
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { RegisterFormComponent } from './login/register-form/register-form.component';
 import {AuthInterceptorService} from './app-interceptor.service';
+import { AddModalComponent } from './management/products/add-modal/add-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {AuthInterceptorService} from './app-interceptor.service';
     FooterComponent,
     ProductModalComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    AddModalComponent
   ],
   imports: [
     BrowserModule,

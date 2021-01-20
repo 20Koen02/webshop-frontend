@@ -1,1 +1,21 @@
-<p>management works!</p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-3 mb-3">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+        <li ngbNavItem="products">
+          <a ngbNavLink (click)="changeFragment()">Products</a>
+          <ng-template ngbNavContent>
+            <app-products></app-products>
+          </ng-template>
+        </li>
+        <li ngbNavItem="users">
+          <a ngbNavLink (click)="changeFragment()">Users</a>
+          <ng-template ngbNavContent>
+            <app-users></app-users>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+    <div [ngbNavOutlet]="nav" class="col-md-9"></div>
+  </div>
+</div>

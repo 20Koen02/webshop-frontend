@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-lg-4 col-md-6 text-center p-4" *ngFor="let product of products.products" (click)="open(product)">
+    <div class="col-lg-4 col-md-6 text-center p-4" *ngFor="let product of products.getFiltered()" (click)="open(product)">
       <div class="product-container">
         <div class="overflow-hidden">
           <img src="{{product.image}}" alt="Image of {{ product.name }}" class="w-100 img-fluid">

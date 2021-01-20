@@ -9,6 +9,8 @@ import {log} from 'util';
 import {Router} from '@angular/router';
 import {LoginFormService} from './login/login-form/login-form.service';
 import {EditService} from './profile/edit/edit.service';
+import {AddModalComponent} from './management/products/add-modal/add-modal.component';
+import {AddModalService} from './management/products/add-modal.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,7 @@ export class BackendService {
               private editService: EditService) {
   }
 
-  editUser(editData: {email: string, password: string}): void {
+  editUser(editData: { email: string, password: string }): void {
     this.http
       .put(this.rootPath + '/users/' + encodeURIComponent(this.curUser.username), editData)
       .pipe(
@@ -49,6 +51,38 @@ export class BackendService {
       .pipe(
         tap((products: Product[]) => {
           this.productsService.setProducts(products);
+        })
+      ).subscribe();
+  }
+
+  deleteProduct(product: Product): void {
+    this.http
+      .delete(this.rootPath + '/products/' + encodeURIComponent(product.id))
+      .pipe(
+        tap((l) => {
+          this.productsService.deleteProduct(product);
+        })
+      ).subscribe();
+  }
+
+  updateProduct(product: Product, property: string, text: string): void {
+    const data = {};
+    data[property] = text;
+    this.http
+      .put(this.rootPath + '/products/' + encodeURIComponent(product.id), data)
+      .pipe(
+        tap((l) => {
+          this.productsService.updateProduct(product, property, text);
+        })
+      ).subscribe();
+  }
+
+  addProduct(name: string, description: string, price: number, image: string): void {
+    this.http
+      .post(this.rootPath + '/products', {name, description, price, image})
+      .pipe(
+        tap((l) => {
+          this.syncAllProducts();
         })
       ).subscribe();
   }
@@ -119,5 +153,4 @@ export class BackendService {
       this.logout();
     }, expirationDuration);
   }
-
 }

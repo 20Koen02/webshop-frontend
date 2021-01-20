@@ -7,13 +7,16 @@ import {CartComponent} from './cart/cart.component';
 import {LoggedInUser} from './shared/logged-in-user.model';
 import {LoginComponent} from './login/login.component';
 import {AppAuthGuard} from './app-auth.guard';
+import {ManagementComponent} from './management/management.component';
+import {AppAdminGuard} from './app-admin.guard';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'shop', component: ShopComponent },
   { path: 'profile', canActivate: [AppAuthGuard], component: ProfileComponent },
   { path: 'cart', component: CartComponent },
-  { path: 'login', component: LoginComponent }
+  { path: 'login', component: LoginComponent },
+  { path: 'management', canActivate: [AppAuthGuard, AppAdminGuard], component: ManagementComponent }
 ];
 
 

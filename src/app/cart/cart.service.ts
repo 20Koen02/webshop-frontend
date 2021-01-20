@@ -14,6 +14,9 @@ export class CartService {
     return this.products.filter(value => value.quantity > 0);
   }
 
+  getTotalPrice(): number {
+    return this.products.map(p => p.price * p.quantity).reduce((a, b) => a + b, 0);
+  }
 
   addProduct(product: CartProduct): void {
     let exists = false;

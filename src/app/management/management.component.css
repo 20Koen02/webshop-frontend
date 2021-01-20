@@ -1,0 +1,10 @@
+.nav-item a {
+  color: #434343;
+  border: 1px solid #434343;
+}
+
+.nav-item .active {
+  border: 1px solid #434343;
+  background-color: #434343;
+  color: white;
+}
