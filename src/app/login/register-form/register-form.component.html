@@ -1,1 +1,30 @@
-<p>register-form works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="email">Your email</label>
+    <input id="email" formControlName="email" name="email" class="form-control" placeholder="Email" type="email"
+           [ngClass]="{'is-invalid': f.email.touched && f.email.invalid}">
+  </div>
+  <div class="form-group">
+    <label for="username">Your username</label>
+    <input id="username" formControlName="username" name="username" class="form-control" placeholder="Username"
+           type="text" [ngClass]="{'is-invalid': f.username.touched && f.username.invalid}">
+  </div>
+  <div class="form-group">
+    <label for="password">Your password</label>
+    <input id="password" formControlName="password" class="form-control" placeholder="******" type="password"
+           [ngClass]="{'is-invalid': f.password.touched && f.password.invalid}">
+  </div>
+  <div class="form-group" style="min-height: 78px">
+    <re-captcha
+      formControlName="recaptcha"
+      (resolved)="resolved($event)"
+      (error)="onError($event)"
+      errorMode="handled"
+      siteKey="6LeWtTgaAAAAAFZoBfTIm9RFIB6tDMyPlkfUGmyo"
+      badge="bottomright"
+    ></re-captcha>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-secondary btn-block" [disabled]="!form.valid">Register</button>
+  </div>
+</form>

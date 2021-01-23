@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from '../../../shared/product.model';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BackendService} from '../../../backend.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class AddModalComponent implements OnInit {
 
   }
 
-  get f(): any {
+  get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 

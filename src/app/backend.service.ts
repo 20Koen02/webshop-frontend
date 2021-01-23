@@ -5,12 +5,11 @@ import {Product} from './shared/product.model';
 import {catchError, map, tap} from 'rxjs/operators';
 import {ProductsService} from './shop/products.service';
 import {Observable, throwError} from 'rxjs';
-import {log} from 'util';
 import {Router} from '@angular/router';
 import {LoginFormService} from './login/login-form/login-form.service';
 import {EditService} from './profile/edit/edit.service';
-import {AddModalComponent} from './management/products/add-modal/add-modal.component';
-import {AddModalService} from './management/products/add-modal.service';
+import {User} from './shared/user.model';
+import {UserService} from './management/users/user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +23,8 @@ export class BackendService {
               private productsService: ProductsService,
               private router: Router,
               private loginFormService: LoginFormService,
-              private editService: EditService) {
+              private editService: EditService,
+              private userService: UserService) {
   }
 
   editUser(editData: { email: string, password: string }): void {
@@ -51,6 +51,16 @@ export class BackendService {
       .pipe(
         tap((products: Product[]) => {
           this.productsService.setProducts(products);
+        })
+      ).subscribe();
+  }
+
+  syncAllUsers(): void {
+    this.http
+      .get<User[]>(this.rootPath + '/users')
+      .pipe(
+        tap((users: User[]) => {
+          this.userService.setUsers(users);
         })
       ).subscribe();
   }
@@ -90,6 +100,21 @@ export class BackendService {
   login(username: string, password: string): void {
     this.http
       .post(this.rootPath + '/auth/login', {username, password})
+      .pipe(
+        tap(l => {
+          this.handleAuth(l);
+          this.router.navigate(['/profile']);
+        }),
+        catchError(err => {
+          this.loginFormService.wrongPassword();
+          return throwError('Incorrect username or password');
+        })
+      ).subscribe();
+  }
+
+  register(email: string, username: string, password: string, recaptcha: string): void {
+    this.http
+      .post(this.rootPath + '/users', {email, username, password, admin: false, 'g-recaptcha-response': recaptcha})
       .pipe(
         tap(l => {
           this.handleAuth(l);

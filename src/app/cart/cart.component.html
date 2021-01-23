@@ -36,7 +36,7 @@
           </svg>
         </td>
         <td>€ {{ product.price | number }}</td>
-        <td>€ {{ ((product.price | number) * (product.quantity | number)).toFixed(2)}}</td>
+        <td>€ {{ cartService.getProductPrice(product).toFixed(2)}}</td>
         <td>
           <button class="btn btn-outline-danger mr-2 p-2 svgbutton" (click)="removeProduct(product)">
             <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="trash-alt" role="img"

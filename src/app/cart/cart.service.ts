@@ -10,8 +10,16 @@ export class CartService {
   constructor() {
   }
 
+  getTotalQty(): number {
+    return this.getFilteredProducts().map(p => p.quantity).reduce((a, b) => a + b, 0);
+  }
+
   getFilteredProducts(): CartProduct[] {
     return this.products.filter(value => value.quantity > 0);
+  }
+
+  getProductPrice(product: CartProduct): number {
+    return product.price * product.quantity;
   }
 
   getTotalPrice(): number {

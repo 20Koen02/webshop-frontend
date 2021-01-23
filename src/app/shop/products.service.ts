@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Product} from '../shared/product.model';
-import {CartProduct} from '../shared/cart-product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
-  products: Product[] = [];
+  public products: Product[] = [];
 
   constructor() {
   }

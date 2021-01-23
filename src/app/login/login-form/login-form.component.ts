@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BackendService} from '../../backend.service';
 import {LoginFormService} from './login-form.service';
 
@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-  get f(): any {
+  get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 

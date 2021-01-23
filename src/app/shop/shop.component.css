@@ -1,5 +1,5 @@
 
-.product-container {
+.openhover {
   cursor: pointer;
 }
 
@@ -12,7 +12,7 @@
   transition: transform .5s ease;
 }
 
-.product-container:hover img {
+.openhover:hover img {
   transform: scale(1.2);
 }
 
@@ -25,5 +25,18 @@
 .product-price {
   font-weight: 400;
   font-size: 1rem;
+}
+
+.custom-action-icon {
+  position: relative;
+  height: 16px;
+  width: 16px;
+  margin-right: 2px;
+  bottom: 1px;
+}
+
+
+.svgbutton {
+  line-height: 20px;
 }
 

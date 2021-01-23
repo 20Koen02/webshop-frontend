@@ -2,7 +2,7 @@
   <div class="card login-card">
     <article class="card-body">
       <a (click)="register = !register" class="float-right btn btn-outline-secondary">{{ register ? 'Login' : 'Register' }}</a>
-      <h4 class="card-title mb-4 mt-1">Login</h4>
+      <h4 class="card-title mb-4 mt-1">{{ register ? 'Register' : 'Login' }}</h4>
       <app-login-form *ngIf="!register"></app-login-form>
       <app-register-form *ngIf="register"></app-register-form>
     </article>

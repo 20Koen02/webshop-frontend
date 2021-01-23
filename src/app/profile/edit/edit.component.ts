@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BackendService} from '../../backend.service';
 import {LoginFormService} from '../../login/login-form/login-form.service';
 import {EditService} from './edit.service';
@@ -19,7 +19,7 @@ export class EditComponent implements OnInit, OnDestroy {
     });
   }
 
-  get f(): any {
+  get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 

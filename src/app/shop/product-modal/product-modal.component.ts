@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Product} from '../../shared/product.model';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -25,7 +25,7 @@ export class ProductModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  get f(): any {
+  get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
   }
 

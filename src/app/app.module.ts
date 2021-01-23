@@ -23,6 +23,8 @@ import { LoginFormComponent } from './login/login-form/login-form.component';
 import { RegisterFormComponent } from './login/register-form/register-form.component';
 import {AuthInterceptorService} from './app-interceptor.service';
 import { AddModalComponent } from './management/products/add-modal/add-modal.component';
+import {RecaptchaFormsModule, RecaptchaModule} from 'ng-recaptcha';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,10 @@ import { AddModalComponent } from './management/products/add-modal/add-modal.com
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
+    NoopAnimationsModule,
   ],
   providers: [
     {
