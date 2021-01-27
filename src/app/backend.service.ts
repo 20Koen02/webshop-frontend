@@ -186,8 +186,7 @@ export class BackendService {
       .post(this.rootPath + '/users', {email, username, password, admin: false, 'g-recaptcha-response': recaptcha})
       .pipe(
         tap(l => {
-          this.handleAuth(l);
-          this.router.navigate(['/profile']);
+          this.login(username, password);
         }),
         catchError(err => {
           this.loginFormService.wrongPassword();
