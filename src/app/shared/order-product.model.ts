@@ -1,7 +1,7 @@
 import {ProductModalComponent} from '../shop/product-modal/product-modal.component';
 import {Product} from './product.model';
 
-export class CartProduct extends Product {
+export class OrderProduct extends Product {
   constructor(id: string,
               name: string,
               description: string,

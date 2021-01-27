@@ -6,7 +6,6 @@ import {ProductModalComponent} from './product-modal/product-modal.component';
 import {Product} from '../shared/product.model';
 import {CartProduct} from '../shared/cart-product.model';
 import {CartService} from '../cart/cart.service';
-import {ActivatedRoute, Router} from '@angular/router';
 
 
 @Component({
@@ -40,7 +39,8 @@ export class ShopComponent implements OnInit {
 
   addOneToCart(product: Product): void {
     const newCartProduct = new CartProduct(product.id, product.name, product.description,
-      product.price, product.image, product.deleted, 1, new Date());
+      product.price, product.image, product.deleted, 1);
     this.cartService.addProduct(newCartProduct);
+    this.backend.setCart(this.cartService.products);
   }
 }

@@ -8,10 +8,16 @@
             <app-products></app-products>
           </ng-template>
         </li>
-        <li ngbNavItem="users">
+        <li ngbNavItem="users" class="nav-middle">
           <a ngbNavLink (click)="changeFragment()">Users</a>
           <ng-template ngbNavContent>
             <app-users></app-users>
+          </ng-template>
+        </li>
+        <li ngbNavItem="orders">
+          <a ngbNavLink (click)="changeFragment()">Orders</a>
+          <ng-template ngbNavContent>
+            <app-manage-orders></app-manage-orders>
           </ng-template>
         </li>
       </ul>

@@ -3,14 +3,14 @@ import {ProductsService} from '../../shop/products.service';
 import {BackendService} from '../../backend.service';
 import {Product} from '../../shared/product.model';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {AddModalComponent} from './add-modal/add-modal.component';
+import {ProductAddModalComponent} from './product-add-modal/product-add-modal.component';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ManageProductsComponent implements OnInit {
   constructor(public productsService: ProductsService, private backend: BackendService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -30,6 +30,6 @@ export class ProductsComponent implements OnInit {
   }
 
   open(): void {
-    this.modalService.open(AddModalComponent);
+    this.modalService.open(ProductAddModalComponent);
   }
 }

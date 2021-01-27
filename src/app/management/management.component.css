@@ -8,3 +8,8 @@
   background-color: #434343;
   color: white;
 }
+
+.nav-middle a {
+  border-bottom: 0;
+  border-top: 0;
+}

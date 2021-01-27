@@ -17,19 +17,16 @@
         </tr>
         <tr *ngFor="let user of userService.users; let id = index">
           <td>
-          <span class="editable-field" contenteditable="true" (keydown.enter)="enterKey($event)"
-                (blur)="update(user, 'name', $event)">{{user.username}}</span>
+            <span>{{user.username}}</span>
           </td>
           <td>
-          <span class="editable-field" contenteditable="true" (keydown.enter)="enterKey($event)"
-                (blur)="update(user, 'description', $event)">{{user.email}}</span>
+            <span>{{user.email}}</span>
           </td>
           <td>
-          <h5 class="editable-field" contenteditable="true" (keydown.enter)="enterKey($event)"
-                (blur)="update(user, 'price', $event)">
-            <span class="badge badge-danger" *ngIf="!user.admin">{{user.admin}}</span>
-            <span class="badge badge-success" *ngIf="user.admin">{{user.admin}}</span>
-          </h5>
+            <h5>
+              <span class="badge badge-danger" *ngIf="!user.admin">{{user.admin}}</span>
+              <span class="badge badge-success" *ngIf="user.admin">{{user.admin}}</span>
+            </h5>
           </td>
           <td>
             <button class="btn btn-outline-danger mr-2 p-2 svgbutton" (click)="remove(user)">

@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <h4 class="modal-title">Order Products</h4>
+</div>
+<div class="modal-body px-5">
+  <div class="row">
+    <div class="col-12" *ngIf="order.products.length > 0">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+          </tr>
+          <tr *ngFor="let p of order.products; let id = index">
+            <td>
+              <img src="{{p.product.image}}" alt="{{p.product.name}}" style="height: 30px">
+            </td>
+            <td>
+              <span>{{p.product.name}}</span>
+            </td>
+            <td>
+              <span>{{p.product.price}}</span>
+            </td>
+            <td>
+              <span>{{p.quantity}}</span>
+            </td>
+            <td>
+              <span>{{(p.quantity * p.product.price).toFixed(2)}}</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <h3 *ngIf="order.products.length < 1" class="text-center mt-3">There are no products in this order</h3>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" ngbAutofocus (click)="activeModal.close()">Close &times;</button>
+</div>

@@ -11,7 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class ManagementComponent implements OnInit {
   active = 'products';
-  allowed = ['products', 'users'];
+  allowed = ['products', 'users', 'orders'];
 
   constructor(private router: Router, private route: ActivatedRoute) {
     if (this.route.snapshot.fragment) {

@@ -6,8 +6,18 @@ import {CartProduct} from '../shared/cart-product.model';
 })
 export class CartService {
   products: CartProduct[] = [];
+  orderSuccess = false;
+  errorMessage = '';
 
   constructor() {
+  }
+
+  setOrderSuccess(state: boolean): void {
+    this.orderSuccess = state;
+  }
+
+  errorOrdering(err: string): void {
+    this.errorMessage = err;
   }
 
   getTotalQty(): number {
@@ -27,11 +37,11 @@ export class CartService {
   }
 
   addProduct(product: CartProduct): void {
+    this.setOrderSuccess(false);
     let exists = false;
     this.products.forEach((p: CartProduct) => {
       if (p.name === product.name) {
         exists = true;
-        p.addedDate = product.addedDate;
         p.quantity = p.quantity + product.quantity;
       }
     });

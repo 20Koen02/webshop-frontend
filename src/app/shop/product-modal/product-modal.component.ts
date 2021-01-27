@@ -4,6 +4,7 @@ import {Product} from '../../shared/product.model';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CartService} from '../../cart/cart.service';
 import {CartProduct} from '../../shared/cart-product.model';
+import {BackendService} from '../../backend.service';
 
 @Component({
   selector: 'app-product-modal',
@@ -16,7 +17,8 @@ export class ProductModalComponent implements OnInit {
   quantity = null;
 
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private cartService: CartService) {
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder,
+              private cartService: CartService, private backend: BackendService) {
     this.form = fb.group({
       quantity: [1, [Validators.required, Validators.min(1), Validators.max(500)]]
     });
@@ -32,8 +34,8 @@ export class ProductModalComponent implements OnInit {
   submit(): void {
     this.quantity = this.form.value.quantity;
     const newCartProduct = this.product as CartProduct;
-    newCartProduct.addedDate = new Date();
     newCartProduct.quantity = this.quantity;
     this.cartService.addProduct(newCartProduct);
+    this.backend.setCart(this.cartService.products);
   }
 }

@@ -6,10 +6,10 @@ import {BackendService} from '../../../backend.service';
 
 @Component({
   selector: 'app-add-modal',
-  templateUrl: './add-modal.component.html',
-  styleUrls: ['./add-modal.component.css']
+  templateUrl: './product-add-modal.component.html',
+  styleUrls: ['./product-add-modal.component.css']
 })
-export class AddModalComponent implements OnInit {
+export class ProductAddModalComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private backendService: BackendService) {
     this.form = fb.group({

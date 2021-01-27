@@ -10,6 +10,12 @@ import {LoginFormService} from './login/login-form/login-form.service';
 import {EditService} from './profile/edit/edit.service';
 import {User} from './shared/user.model';
 import {UserService} from './management/users/user.service';
+import {Order} from './shared/order.model';
+import {ManageOrderService} from './management/orders/order.service';
+import {OrderProduct} from './shared/order-product.model';
+import {CartProduct} from './shared/cart-product.model';
+import {CartService} from './cart/cart.service';
+import {UserOrderService} from './profile/orders/order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +30,10 @@ export class BackendService {
               private router: Router,
               private loginFormService: LoginFormService,
               private editService: EditService,
-              private userService: UserService) {
+              private userService: UserService,
+              private manageOrderService: ManageOrderService,
+              private userOrderService: UserOrderService,
+              private cartService: CartService) {
   }
 
   editUser(editData: { email: string, password: string }): void {
@@ -61,6 +70,67 @@ export class BackendService {
       .pipe(
         tap((users: User[]) => {
           this.userService.setUsers(users);
+        })
+      ).subscribe();
+  }
+
+  syncMyOrders(): void {
+    this.http
+      .get<any[]>(this.rootPath + '/orders/' + this.curUser.username)
+      .pipe(
+        tap((orders: any[]) => {
+          const allOrders: Order[] = [];
+          for (const order of orders) {
+            const orderUser: User = order.user as User;
+            const orderProducts: OrderProduct[] = order.products.map((p: any) => p as OrderProduct);
+            allOrders.push(new Order(order.id, orderUser, orderProducts, new Date(order.orderDate), order.totalPrice));
+          }
+          this.userOrderService.setOrders(allOrders);
+
+        })
+      ).subscribe();
+  }
+
+
+  syncAllOrders(): void {
+    this.http
+      .get<any[]>(this.rootPath + '/orders')
+      .pipe(
+        tap((orders: any[]) => {
+          const allOrders: Order[] = [];
+          for (const order of orders) {
+            const orderUser: User = order.user as User;
+            const orderProducts: OrderProduct[] = order.products.map((p: any) => p as OrderProduct);
+            console.log();
+            allOrders.push(new Order(order.id, orderUser, orderProducts, new Date(order.orderDate), order.totalPrice));
+          }
+          this.manageOrderService.setOrders(allOrders);
+
+        })
+      ).subscribe();
+  }
+
+  syncCart(): void {
+    this.http
+      .get<any>(this.rootPath + '/carts/' + this.curUser.username)
+      .pipe(
+        tap((cart: any) => {
+          const cartProducts: CartProduct[] = cart.products.map((p: any) => {
+            return new CartProduct(p.id, p.product.name, p.product.description,
+              p.product.price, p.product.image, p.product.deleted, p.quantity);
+          });
+          this.cartService.products = cartProducts;
+        })
+      ).subscribe();
+  }
+
+
+  deleteUser(user: User): void {
+    this.http
+      .delete(this.rootPath + '/users/' + encodeURIComponent(user.username))
+      .pipe(
+        tap((l) => {
+          this.userService.deleteUser(user);
         })
       ).subscribe();
   }
@@ -123,6 +193,52 @@ export class BackendService {
         catchError(err => {
           this.loginFormService.wrongPassword();
           return throwError('Incorrect username or password');
+        })
+      ).subscribe();
+  }
+
+  addUser(username: string, password: string, admin: boolean, email: string): void {
+    this.http
+      .post(this.rootPath + '/users', {email, username, password, admin})
+      .pipe(
+        tap(l => {
+          this.syncAllUsers();
+        })
+      ).subscribe();
+  }
+
+
+  addOrder(totalPrice: number, products: CartProduct[]): void {
+    this.http
+      .post(this.rootPath + '/orders/' + this.curUser.username, {totalPrice})
+      .pipe(
+        tap(id => {
+          this.addProductsToOrder(products, String(id));
+        }),
+        catchError(err => {
+          this.cartService.errorOrdering(String(err.error));
+          return throwError('Order Limit Reached');
+        })
+      ).subscribe();
+  }
+
+  addProductsToOrder(products: CartProduct[], id: string): void {
+    this.http
+      .post(this.rootPath + '/orders/' + this.curUser.username + '/' + id + '/products', products)
+      .pipe(
+        tap(l => {
+          this.setCart([]);
+          this.cartService.setOrderSuccess(true);
+          this.cartService.products = [];
+        })
+      ).subscribe();
+  }
+
+  setCart(products: CartProduct[]): void {
+    this.http
+      .post(this.rootPath + '/carts/' + this.curUser.username + '/products', products)
+      .pipe(
+        tap(l => {
         })
       ).subscribe();
   }

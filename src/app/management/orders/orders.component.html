@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12 col-md">
-    <h3 class="card-title mb-3">Your Orders</h3>
+    <h3 class="card-title mb-3">Orders</h3>
   </div>
   <div class="col-12" *ngIf="orderService.orders.length > 0">
     <div class="table-responsive">
@@ -40,4 +40,4 @@
     </div>
   </div>
 </div>
-<h3 *ngIf="orderService.orders.length < 1" class="text-center mt-3">You have not ordered anything</h3>
+<h3 *ngIf="orderService.orders.length < 1" class="text-center mt-3">There are no orders in this webshop</h3>

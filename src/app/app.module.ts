@@ -4,11 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ManagementComponent } from './management/management.component';
-import { UsersComponent } from './management/users/users.component';
-import { ProductsComponent } from './management/products/products.component';
+import { ManageUsersComponent } from './management/users/users.component';
+import { ManageProductsComponent } from './management/products/products.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditComponent } from './profile/edit/edit.component';
-import { OrdersComponent } from './profile/orders/orders.component';
+import { UserOrdersComponent} from './profile/orders/orders.component';
 import { CartComponent } from './cart/cart.component';
 import { ShopComponent } from './shop/shop.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -22,20 +22,23 @@ import { ProductModalComponent } from './shop/product-modal/product-modal.compon
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { RegisterFormComponent } from './login/register-form/register-form.component';
 import {AuthInterceptorService} from './app-interceptor.service';
-import { AddModalComponent } from './management/products/add-modal/add-modal.component';
+import { ProductAddModalComponent} from './management/products/product-add-modal/product-add-modal.component';
 import {RecaptchaFormsModule, RecaptchaModule} from 'ng-recaptcha';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {UserAddModalComponent} from './management/users/user-add-modal/user-add-modal.component';
+import {ManageOrdersComponent} from './management/orders/orders.component';
+import { OrderModalComponent } from './order-modal/order-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ManagementComponent,
-    UsersComponent,
-    ProductsComponent,
+    ManageUsersComponent,
+    ManageProductsComponent,
+    ManageOrdersComponent,
     ProfileComponent,
     EditComponent,
-    OrdersComponent,
     CartComponent,
     ShopComponent,
     HeaderComponent,
@@ -44,7 +47,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ProductModalComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    AddModalComponent
+    ProductAddModalComponent,
+    UserAddModalComponent,
+    UserOrdersComponent,
+    OrderModalComponent,
   ],
   imports: [
     BrowserModule,

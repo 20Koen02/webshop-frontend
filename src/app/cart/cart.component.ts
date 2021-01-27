@@ -9,17 +9,22 @@ import {CartProduct} from '../shared/cart-product.model';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  constructor(public backendService: BackendService, public cartService: CartService) { }
+  constructor(public cartService: CartService, public backend: BackendService) { }
 
   ngOnInit(): void {
+    if (!!this.backend.curUser) {
+      this.backend.syncCart();
+    }
   }
 
   removeProduct(product: CartProduct): void {
     this.cartService.products = this.cartService.products.filter(value => value.name !== product.name);
+    this.backend.setCart(this.cartService.products);
   }
 
   productPlusPlus(product: CartProduct): void {
     product.quantity++;
+    this.backend.setCart(this.cartService.products);
   }
 
   productMinMin(product: CartProduct): void {
@@ -27,11 +32,10 @@ export class CartComponent implements OnInit {
     if (product.quantity < 0) {
       this.cartService.products = this.cartService.products.filter(value => value.name !== product.name);
     }
+    this.backend.setCart(this.cartService.products);
   }
 
   order(): void {
-    // TODO: send request to create order
-    // TODO: send request to add product to order
-    console.log(this.cartService.products);
+    this.backend.addOrder(this.cartService.getTotalPrice(), this.cartService.getFilteredProducts());
   }
 }
