@@ -23,7 +23,7 @@ import {UserOrderService} from './profile/orders/order.service';
 export class BackendService {
   curUser: LoggedInUser = null;
   private tokenExpirationTimer: any;
-  rootPath = 'http://192.168.1.72:5500';
+  rootPath = 'https://iprwc-api.koen02.nl';
 
   constructor(private http: HttpClient,
               private productsService: ProductsService,
@@ -101,7 +101,6 @@ export class BackendService {
           for (const order of orders) {
             const orderUser: User = order.user as User;
             const orderProducts: OrderProduct[] = order.products.map((p: any) => p as OrderProduct);
-            console.log();
             allOrders.push(new Order(order.id, orderUser, orderProducts, new Date(order.orderDate), order.totalPrice));
           }
           this.manageOrderService.setOrders(allOrders);
@@ -245,7 +244,7 @@ export class BackendService {
 
   handleAuth(l: any): void {
     this.curUser = new LoggedInUser(l.user.username, l.user.admin, l.user.email, l.token,
-      new Date(new Date().getTime() + l.expiresIn));
+      new Date(new Date().getTime() + l.expiresIn * 1000));
     this.autoLogout(l.expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(this.curUser));
     this.loginFormService.correctPassword();
